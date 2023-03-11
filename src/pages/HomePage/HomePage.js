@@ -11,11 +11,8 @@ export default function HomePage() {
         const URL = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
         const promise = axios.get(URL)
 
-        promise.then((response) => {
-            console.log(response.data)
-            setListaFilmes(response.data)
-        })
-        promise.catch((err) => console.log(err.response.data))
+        promise.then((response) => setListaFilmes(response.data))
+        promise.catch((err) => alert(err.response.data))
     }, [])
 
     return (
@@ -24,7 +21,7 @@ export default function HomePage() {
 
             <ListContainer>
                 {listaFilmes.map((filme) => (
-                    <Link to={`/sessoes/${filme.id}`}>
+                    <Link key={filme.id} to={`/sessoes/${filme.id}`}>
                         <MovieContainer>
                             <img src={filme.posterURL} alt="poster" />
                         </MovieContainer>
