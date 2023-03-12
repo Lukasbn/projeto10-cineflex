@@ -7,8 +7,7 @@ export default function SessionsPage() {
 
     const [sessoes, setSessoes] = useState([])
     const [filme, setFilme] = useState([])
-    console.log(sessoes)
-
+    
     const { idFilme } = useParams()
 
     useEffect(() => {
