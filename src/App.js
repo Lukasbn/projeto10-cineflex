@@ -20,7 +20,15 @@ export default function App() {
 
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={<HomePage />} />
+                    <Route path="/" element={<HomePage
+                        setFilme={setFilme}
+                        setData={setData}
+                        setHorario={setHorario}
+                        setCpf={setCpf}
+                        setName={setName}
+                        setIngresso={setIngresso}
+                    />}
+                    />
                     <Route path="/sessoes/:idFilme" element={<SessionsPage />} />
                     <Route
                         path="/assentos/:idSessao"

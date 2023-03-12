@@ -1,19 +1,30 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import styled from "styled-components"
 
-export default function HomePage() {
+export default function HomePage({setFilme,setData,setHorario,setCpf,setName,setIngresso}) {
 
     const [listaFilmes, setListaFilmes] = useState([])
 
     useEffect(() => {
+        limpar()
+
         const URL = "https://mock-api.driven.com.br/api/v8/cineflex/movies"
         const promise = axios.get(URL)
 
         promise.then((response) => setListaFilmes(response.data))
         promise.catch((err) => alert(err.response.data))
     }, [])
+
+    function limpar(){
+        setFilme([])
+        setData([])
+        setHorario("")
+        setCpf("")
+        setName("")
+        setIngresso([])
+    }
 
     return (
         <PageContainer>
@@ -22,7 +33,7 @@ export default function HomePage() {
             <ListContainer>
                 {listaFilmes.map((filme) => (
                     <Link key={filme.id} to={`/sessoes/${filme.id}`}>
-                        <MovieContainer>
+                        <MovieContainer data-test="movie">
                             <img src={filme.posterURL} alt="poster" />
                         </MovieContainer>
                     </Link>

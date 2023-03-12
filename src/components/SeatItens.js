@@ -26,7 +26,7 @@ export default function SeatItens({lugares, ocupado, ids, setIds, id,ingresso,se
     }
 
     return(
-        <SeatItem onClick={toggleSeat} livre={livre} selecionado={selecionado}>{lugares}</SeatItem>
+        <SeatItem data-test="seat" onClick={toggleSeat} livre={livre} selecionado={selecionado}>{lugares}</SeatItem>
     )
 }
 

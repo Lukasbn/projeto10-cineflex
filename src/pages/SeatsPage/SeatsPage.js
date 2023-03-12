@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import styled from "styled-components"
 import SeatItens from "../../components/SeatItens"
 
-export default function SeatsPage({filme,setFilme,data,setData,horario,setHorario,cpf,setCpf,name,setName,ingresso,setIngresso}) {
+export default function SeatsPage({ filme, setFilme, data, setData, horario, setHorario, cpf, setCpf, name, setName, ingresso, setIngresso }) {
     const Indisponível = '#FBE192'
     const Disponível = '#C3CFD9'
     const Selecionado = '#1AAE9E'
@@ -15,7 +15,7 @@ export default function SeatsPage({filme,setFilme,data,setData,horario,setHorari
     const [ids, setIds] = useState([])
 
     console.log(data)
-    
+
     const navigate = useNavigate()
 
     const { idSessao } = useParams()
@@ -37,12 +37,12 @@ export default function SeatsPage({filme,setFilme,data,setData,horario,setHorari
     function SolicitarReserva(event) {
         event.preventDefault()
         const URL = 'https://mock-api.driven.com.br/api/v8/cineflex/seats/book-many'
-        const requisicao = { ids , name , cpf }
-        
-        const promise = axios.post(URL,requisicao)
+        const requisicao = { ids, name, cpf }
 
-        promise.then((res)=> navigate("/sucesso"))
-        promise.catch((err)=> console.log(err.response.data))
+        const promise = axios.post(URL, requisicao)
+
+        promise.then((res) => navigate("/sucesso"))
+        promise.catch((err) => console.log(err.response.data))
     }
 
     return (
@@ -82,7 +82,9 @@ export default function SeatsPage({filme,setFilme,data,setData,horario,setHorari
 
             <FormContainer onSubmit={SolicitarReserva}>
                 <label htmlFor="name">Nome do Comprador:</label>
-                <input id="name"
+                <input
+                    data-test="client-name"
+                    id="name"
                     name="name"
                     placeholder="Digite seu nome..."
                     required
@@ -91,18 +93,20 @@ export default function SeatsPage({filme,setFilme,data,setData,horario,setHorari
                 />
 
                 <label htmlFor="cpf">CPF do Comprador:</label>
-                <input id="cpf" 
-                name="cpf" 
-                placeholder="Digite seu CPF..." 
-                required 
-                value={cpf}
-                onChange={e => setCpf(e.target.value)}
+                <input
+                    data-test="client-cpf"
+                    id="cpf"
+                    name="cpf"
+                    placeholder="Digite seu CPF..."
+                    required
+                    value={cpf}
+                    onChange={e => setCpf(e.target.value)}
                 />
 
-                <button type="submit">Reservar Assento(s)</button>
+                <button data-test="book-seat-btn" type="submit">Reservar Assento(s)</button>
             </FormContainer>
 
-            <FooterContainer>
+            <FooterContainer data-test="footer">
                 <div>
                     <img src={filme.posterURL} alt={filme.title} />
                 </div>
